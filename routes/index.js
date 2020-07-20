@@ -35,7 +35,7 @@ router.post('/register', function (req, res) {
         //Check if user already exists
         userModel.find({ username: registerUser.username }, function (err, user) {
             if (err) console.log(err);
-            if (user.length) console.log('Username already exists please login.');
+            if (user.length) return res.redirect('/login');
             const newUser = new userModel(registerUser);
             newUser.save(function (err) {
                 console.log('Inserting');
